@@ -122,12 +122,26 @@ class EstablishmentController{
   getEstablishments = async (req,res) =>{
     let response = this.getResponse();
     try{
-        const es = await db.any(establishmentQuerys.getEstablishement)
-        res.status(200).json(response.rows)
+      let es = await db.any(establishmentQuerys.getEstablishment);
+      res.json(es.rows)
     }catch(error){
       //MANEJO DEL ERROR
       respose.error = error;
-      //respose.status = 500;
+    }finally{
+      //Y AL FINAL ENVIA LA RESPUESTA
+      res.status(200).send(response);
+    }
+  }
+  getEstablishmentsById = async (req,res) =>{
+    let response = this.getResponse();
+    try{
+      const id = await req.params.id
+      const es = await db.any(establishmentQuerys.getEstablishementById, [id])
+      res.json(es.rows[0])
+
+    }catch(error){
+      //MANEJO DEL ERROR
+      respose.error = error;
     }finally{
       //Y AL FINAL ENVIA LA RESPUESTA
       res.status(200).send(response);
@@ -137,52 +151,49 @@ class EstablishmentController{
 
   uptadeEstablishments= async (req,res) =>{
     let response = this.getResponse();
- /*
-    try{
-      const id = req.params.id;
-      const { name, email, password, direction, available, direction, latitude, } = req.body;
-  
-      const response = await db.any(establishmentQuerys.updateEstablishment, [
-          name,
-          email,
-          password,
-          direction,
-          id
-      ]);
-      res.status(200).json(response.rows);
-    }catch{
-      res.status(505);
-    }finally{
-      res.status(200).send(response)
+      try{
+        const id =req.params.id;
+        const {name, email, password, foto, available, latitude, longitude } = req.body;
     
-  };
-    try{
-      const id = req.params.id ;
-     // let rs = await db.any(establishmentQuerys.updateEstablishment, [email, name, password, direction, available]);
-      const { email, password, direction, available, foto } = req.body;
-      const response = await db.any(establishmentQuerys.updateEstablishment, [
-      
-        email,
-        password,
-        available,
-        id,
-        direction,
-        foto
-    ]);
-    //res.status(200).json(response.rows);
-
-    }catch(error){
+        const response = await db.any(establishmentQuerys.updateEstablishment, [
+            name,
+            email,
+            password,
+            foto,
+            available,
+            longitude,
+            latitude,
+            id
+        ]);
+      res.status(200).json(response.rows);
+      }catch(error){
       //MANEJO DEL ERROR
       respose.error = error;
       respose.status = 500;
-    }finally{
+      }finally{
       //Y AL FINAL ENVIA LA RESPUESTA
       res.status(200).send(response)
-     
-    }*/
+      
+    }
   }
 
-
+  deleteEstablishments = async (req,res) => {
+    let response = this.getResponse();
+      try{
+      //LOGICA
+      const id = await req.params.id
+        const es = await db.any(establishmentQuerys.deleteEstablishments, [id])
+        res.json(es.rows[0])
+      }catch(error){
+      //MANEJO DEL ERROR
+      respose.error = error;
+      respose.status = 500;
+      }finally{
+      //Y AL FINAL ENVIA LA RESPUESTA
+      res.status(200).send(response)
+      
+    }
+  }
 }
 
 module.exports = new EstablishmentController();

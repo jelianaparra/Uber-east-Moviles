@@ -103,7 +103,7 @@ class DriverController{
         })
       });
 
-      rs = await db.any(driverQuerys.insertDriver,[email,password,name, lastname]);
+      rs = await db.any(driverQuerys.insertDriver,[email, password,name,lastname]);
 
       response.data = {
         status: 200

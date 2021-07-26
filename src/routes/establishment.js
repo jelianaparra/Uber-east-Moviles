@@ -10,6 +10,8 @@ api.post('/establishment/signup', establishmentController.signup)
 
 // crud de los establecimientos
 api.get('/establishment/getEstablishments', establishmentController.getEstablishments)
+api.get('/establishment/getEstablishmentsById/:id', establishmentController.getEstablishmentsById)
 api.put('/establishment/uptadeEstablishments/:id', establishmentController.uptadeEstablishments)
+api.delete('/establishment/deleteEstablishments/:id', establishmentController.deleteEstablishments)
 
 module.exports = api;

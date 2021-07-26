@@ -22,18 +22,33 @@ const queries = {
         INSERT INTO establishement(
             e_email, 
             e_password, 
-            e_name
+            e_name,
+            e_latitude,
+            e_longitude,
+            e_direction,
+            e_foto,
+            e_available
         )
-        VALUES($1, $2, $3)`,
+        VALUES($1, $2, $3, $4, $5, $8)`,
     }),
     updateEstablishment: new PS({
         name: "updateEstablishment",
         text: `
         UPDATE establishement SET
             e_email = $1,
-            e_name = $2
-        WHERE e_id = $3;`,
+            e_name = $2,
+            e_latitude = $3,
+            e_longitude = $4, 
+            e_direction= $5,
+            e_foto = $6,
+            e_available = $7,
+            e_password= $8,
+        WHERE e_id = $8;`,
     }),
+    deleteEstablishments: new PS({
+        name: "deleteEstablishments",
+        text: "DELETE FROM establishments where id = $1`"
+    })
 };
 
 module.exports = queries;
