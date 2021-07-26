@@ -1,0 +1,33 @@
+{
+  "name": "ubereats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js --trace-warnings",
+    "start": "node index.js",
+    "prod": "pm2 start --env production"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "helmet": "^4.4.1",
+    "html-pdf": "^2.2.0",
+    "jwt-simple": "^0.5.6",
+    "md5": "^2.3.0",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7",
+    "pg-promise": "^10.10.2",
+    "sharp": "^0.27.2",
+    "striptags": "^3.1.1",
+    "uniqid": "^5.3.0",
+    "utf8": "^3.0.0",
+    "winston": "^3.3.3"
+  }
+}
