@@ -1,48 +1,49 @@
-'use strict'
+"use strict";
 
-const { createLogger, format, transports } = require('winston')
-
+const { createLogger, format, transports } = require("winston");
 
 const logger = createLogger({
   format: format.combine(
     format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss'
+      format: "YYYY-MM-DD HH:mm:ss",
     }),
-    format.json(),
+    format.json()
   ),
   transports: [
     new transports.File({
-      level: 'error',
+      level: "error",
       maxsize: 5120000,
       maxFiles: 25,
-      filename: `${ __dirname }/../../logs/error-backend.log`
+      filename: `${__dirname}/../../logs/error-backend.log`,
     }),
     new transports.File({
-      level: 'info',
+      level: "info",
       maxsize: 5120000,
       maxFiles: 15,
-      filename: `${ __dirname }/../../logs/info-backend.log`
+      filename: `${__dirname}/../../logs/info-backend.log`,
     }),
     new transports.File({
-      level: 'debug',
+      level: "debug",
       maxsize: 5120000,
       maxFiles: 15,
-      filename: `${ __dirname }/../../logs/debug-backend.log`
+      filename: `${__dirname}/../../logs/debug-backend.log`,
+    }),
+  ],
+});
+
+if (process.env.NODE_ENV !== "production")
+  logger.add(
+    new transports.Console({
+      format: format.combine(
+        format.timestamp({
+          format: "YYYY-MM-DD HH:mm:ss",
+        }),
+        format.printf(
+          (info) => `[${info.timestamp}] ${info.level} ${info.message}`
+        )
+      ),
+      level: "debug",
     })
-  ]
-})
+  );
 
-
-if(process.env.NODE_ENV !== 'production')
-  logger.add(new transports.Console({
-    format: format.combine(
-      format.timestamp({
-        format: 'YYYY-MM-DD HH:mm:ss'
-      }),
-      format.printf(info => `[${ info.timestamp }] ${ info.level } ${ info.message }`)
-    ),
-    level: 'debug'
-  }))
-
-
-module.exports = logger
+module.exports = logger;

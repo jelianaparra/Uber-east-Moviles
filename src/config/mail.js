@@ -1,64 +1,60 @@
-'use strict'
+"use strict";
 
-let mailOptions
+let mailOptions;
 
-
-switch(process.env.NODE_ENV) {
-
-  case 'development':
+switch (process.env.NODE_ENV) {
+  case "development":
   default:
     mailOptions = {
-      from: '',
-      to: '',
+      from: "",
+      to: "",
       transporter: {
-        host: '',
+        host: "",
         port: 465,
         secure: true,
         auth: {
-          user: '',
-          pass: ``
-        }
-      }
-    }
-    break
+          user: "",
+          pass: ``,
+        },
+      },
+    };
+    break;
 
-  case 'staging':
+  case "staging":
     mailOptions = {
-      from: '',
-      to: '',
+      from: "",
+      to: "",
       transporter: {
-        host: '',
+        host: "",
         port: 465,
         secure: true,
         auth: {
-          user: '',
-          pass: ``
-        }
-      }
-    }
-    break
+          user: "",
+          pass: ``,
+        },
+      },
+    };
+    break;
 
-  case 'production':
+  case "production":
     mailOptions = {
-      from: '',
-      to: '',
+      from: "",
+      to: "",
       transporter: {
-        host: '',
+        host: "",
         port: 465,
         secure: true,
         auth: {
-          user: '',
-          pass: ``
-        }
-      }
-    }
-    break
+          user: "",
+          pass: ``,
+        },
+      },
+    };
+    break;
 }
 
-
 const Config = new Object({
-  mailOptions: mailOptions
-})
+  mailOptions: mailOptions,
+});
 
-
-module.exports = Config
+module.exports = Config;

@@ -1,25 +1,20 @@
-'use strict'
+"use strict";
 
-const base = require('./base')
+const base = require("./base");
 
+let allowDomains;
 
-let allowDomains
-
-
-switch(process.env.NODE_ENV) {
-
-  case 'development':
+switch (process.env.NODE_ENV) {
+  case "development":
   default:
-  case 'staging':
-  case 'production':
-    allowDomains = '*'
-    break
+  case "staging":
+  case "production":
+    allowDomains = "*";
+    break;
 }
 
-
 const Config = new Object({
-  allowDomains: allowDomains
-})
+  allowDomains: allowDomains,
+});
 
-
-module.exports = Config
+module.exports = Config;
