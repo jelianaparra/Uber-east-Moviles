@@ -1,6 +1,5 @@
 CREATE DATABASE proyectofinal
 
-
 CREATE TABLE public.driver
 (
     d_id integer NOT NULL DEFAULT nextval('driver_d_id_seq_1'::regclass),
