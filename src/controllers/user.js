@@ -85,6 +85,8 @@ class UserController{
 
     try {
       let {email, password, name, lastname} = req.body;
+      //console.log(email, password, name, lastname);
+     // console.log(req.body);
       let rs = await db.any(userQuerys.getUsersByEmail, [email]);
 
       if(rs.length){

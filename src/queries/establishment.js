@@ -2,7 +2,7 @@ const { PreparedStatement: PS } = require("pg-promise");
 const queries = {
     getEstablishement: new PS({
         name: "getEstablishement",
-        text: `SELECT * FROM establishement;`,
+        text: `SELECT * FROM Establishement;`,
     }),
     getEstablishementById: new PS({
         name: "getEstablishementById",
@@ -29,7 +29,7 @@ const queries = {
             e_foto,
             e_available
         )
-        VALUES($1, $2, $3, $4, $5, $8)`,
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8)`,
     }),
     updateEstablishment: new PS({
         name: "updateEstablishment",
@@ -42,8 +42,8 @@ const queries = {
             e_direction= $5,
             e_foto = $6,
             e_available = $7,
-            e_password= $8,
-        WHERE e_id = $8;`,
+            e_password= $8
+        WHERE e_id = $9;`,
     }),
     deleteEstablishments: new PS({
         name: "deleteEstablishments",
