@@ -1,33 +1,46 @@
 const db = require("../services/db");
-const productsQuerys = require("../queries/product");
-const ProductsController = {};
+const shoppingCarQuerys = require("../queries/shoppingCar");
+const ShoppingCarController = {};
+const PDF = require("pdfkit");
+const fs = require("fs");
+const invoice = new PDF();
 
-ProductsController.createProducts = async (req, res) => {
+invoice.pipe(fs.createWriteStream("./pruebas/factura.pdf"));
+
+invoice.text("LOS INVITAMOS DE NUEVO A UTILIZAR NUESTRA APLICACION", {
+  align: "center",
+});
+
+/*invoice.image("../images/gracias-por-su-compra.jpg", {
+  fit: [250, 300],
+  align: "center",
+  valign: "center",
+});*/
+var algo = "gggggggggggg";
+invoice.text(algo);
+invoice.end();
+
+ShoppingCarController.addProducts = async (req, res) => {
   try {
-    const { name, description, id, price } = req.body;
-    const p = await db.any(productsQuerys.insertProducts, [
-      name,
-      description,
-      id,
-      price,
-    ]);
+    const { products, total } = req.body;
+    const p = await db.any(shoppingCarQuerys.insertProducts, [products, total]);
     res.status(200).json({
-      msg: "Products Successfully created",
+      msg: "Products Successfully added",
       statusCode: 200,
       data: p,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      msg: "The product could not be created",
+      msg: "The product could not be added",
       statusCode: 500,
     });
   }
 };
 
-ProductsController.getProducts = async (req, res) => {
+ShoppingCarController.getProducts = async (req, res) => {
   try {
-    let p = await db.any(productsQuerys.getProducts);
+    let p = await db.any(shoppingCarQuerys.getProducts);
     console.log(p);
     res.status(200).json({
       msg: "Products Successfully Found",
@@ -37,12 +50,14 @@ ProductsController.getProducts = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      msg: "No products found",
+      msg: "No products in your ShoppingCar",
       statusCode: 500,
     });
   }
 };
-ProductsController.getProductsById = async (req, res) => {
+
+/*
+ShoppingCarController.getProductsById = async (req, res) => {
   try {
     const id = await req.params.id;
     const p = await db.any(productsQuerys.getProductsById, [id]);
@@ -60,7 +75,7 @@ ProductsController.getProductsById = async (req, res) => {
   }
 };
 
-ProductsController.uptadeProducts = async (req, res) => {
+ShoppingCarController.uptadeProducts = async (req, res) => {
   try {
     const id = req.params.id;
     const { name, description, idEst, price } = req.body;
@@ -84,24 +99,24 @@ ProductsController.uptadeProducts = async (req, res) => {
       statusCode: 500,
     });
   }
-};
+};*/
 
-ProductsController.deleteProducts = async (req, res) => {
+ShoppingCarController.deleteProducts = async (req, res) => {
   try {
     const id = await req.params.id;
-    const p = await db.any(productsQuerys.deleteProducts, [id]);
+    const p = await db.any(shoppingCarQuerys.deleteProducts, [id]);
     res.status(200).json({
-      msg: "Product removed successfully",
+      msg: "Product removed successfully from your ShoppingCar",
       statusCode: 200,
       data: p,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      msg: "The product could not be eliminated",
+      msg: "The product could not be eliminated from your ShoppingCar",
       statusCode: 500,
     });
   }
 };
 
-module.exports = ProductsController;
+module.exports = ShoppingCarController;

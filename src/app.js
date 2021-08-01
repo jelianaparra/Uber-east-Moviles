@@ -11,6 +11,7 @@ const express = require("express"),
   mdAuth = require("./middlewares/auth"),
   sharp = require("sharp"),
   fs = require("fs"),
+  ShoppingCarRoute = require("./routes/shoppingCar"),
   productRoute = require("./routes/product"),
   driverRoute = require("./routes/driver"),
   userRoute = require("./routes/user"),
@@ -59,7 +60,13 @@ app.use((req, res, next) => {
   }
 });
 
-app.use("/api/v1", [productRoute, userRoute, establishmentRoute, driverRoute]);
+app.use("/api/v1", [
+  productRoute,
+  userRoute,
+  establishmentRoute,
+  driverRoute,
+  ShoppingCarRoute,
+]);
 
 app.get("/health", (req, res) => {
   res.sendStatus(200);
