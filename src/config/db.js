@@ -1,10 +1,10 @@
 "use strict";
 
 const Config = new Object({
-  host: "localhost",
-  user: "postgres",
-  password: "admin",
-  database: "proyectofinal",
+  host: "ec2-3-213-146-52.compute-1.amazonaws.com",
+  user: "qczifndntpqwvg",
+  password: "461dc795e21ff02262ad303773aaeddc297e1d0c389cd01991eddddd71908ea9",
+  database: "dc20sj3s5r9r69",
   port: 5432,
 });
 
