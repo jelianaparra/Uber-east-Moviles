@@ -13,8 +13,8 @@ getResponse = () => {
 };
 
 EstablishmentController.signin = async (req, res) => {
+  const response = getResponse();
   try {
-    const response = getResponse();
     let { email, password } = req.body;
     let profile = await db.any(establishmentQuerys.getEstablishmentByEmail, [
       email,
