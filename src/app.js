@@ -11,7 +11,7 @@ const express = require("express"),
   mdAuth = require("./middlewares/auth"),
   sharp = require("sharp"),
   fs = require("fs"),
-  ShoppingCarRoute = require("./routes/shoppingCar"),
+  purchaseRoute = require("./routes/purchase"),
   productRoute = require("./routes/product"),
   driverRoute = require("./routes/driver"),
   userRoute = require("./routes/user"),
@@ -65,7 +65,7 @@ app.use("/api/v1", [
   userRoute,
   establishmentRoute,
   driverRoute,
-  ShoppingCarRoute,
+  purchaseRoute,
 ]);
 
 app.get("/health", (req, res) => {

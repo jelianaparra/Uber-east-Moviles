@@ -8,10 +8,15 @@ const queries = {
     name: "getProductsById",
     text: `SELECT * FROM product WHERE p_id = $1;`,
   }),
+  getProductsByIdEstablishment: new PS({
+    name: "getProductsById",
+    text: `SELECT * FROM product WHERE e_id = $1;`,
+  }),
   getProductsByName: new PS({
     name: "getProductsByName",
     text: `SELECT * FROM product WHERE p_name = $1;`,
   }),
+
   getProductsByEmailDistinctId: new PS({
     name: "getEstablishmentByEmailDistinctId",
     text: `SELECT * FROM establishement WHERE e_email = $1 AND e_id != $2;`,
@@ -33,10 +38,9 @@ const queries = {
         UPDATE product SET
             p_name = $1,
             p_description = $2, 
-            e_id = $3,
-            p_price = $4
+            p_price = $3
 
-        WHERE p_id = $5;`,
+        WHERE p_id = $4;`,
   }),
   deleteProducts: new PS({
     name: "deleteProducts",

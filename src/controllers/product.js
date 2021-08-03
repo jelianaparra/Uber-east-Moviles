@@ -60,15 +60,32 @@ ProductsController.getProductsById = async (req, res) => {
   }
 };
 
+ProductsController.getProductsByIdEstablishment = async (req, res) => {
+  try {
+    const id = await req.params.id;
+    const p = await db.any(productsQuerys.getProductsByIdEstablishment, [id]);
+    res.status(200).json({
+      msg: "Product Successfully Found",
+      statusCode: 200,
+      data: p,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: "The Product you are looking for does not exist... Sorry",
+      statusCode: 500,
+    });
+  }
+};
+
 ProductsController.uptadeProducts = async (req, res) => {
   try {
     const id = req.params.id;
-    const { name, description, idEst, price } = req.body;
+    const { name, description, price } = req.body;
     console.log(id);
     const p = await db.any(productsQuerys.updateProducts, [
       name,
       description,
-      idEst,
       price,
       id,
     ]);

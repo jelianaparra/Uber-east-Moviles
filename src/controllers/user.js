@@ -5,7 +5,11 @@ const userQuerys = require("../queries/user");
 const UserController = {};
 
 UserController.signin = async (req, res) => {
-  const response = this.getResponse();
+  const response = {
+    status: 200,
+    data: [],
+    error: [],
+  };
   try {
     let { email, password } = req.body;
     let profile = await db.any(userQuerys.getUsersByEmail, [email]);
@@ -54,12 +58,16 @@ UserController.signin = async (req, res) => {
       response.error = error;
     }
   } finally {
-    res.status(response.status).send(response);
+    res.status(200).send(response);
   }
 };
 
 UserController.signup = async (req, res) => {
-  let response = this.getResponse();
+  const response = {
+    status: 200,
+    data: [],
+    error: [],
+  };
 
   try {
     let { email, password, name, lastname } = req.body;
@@ -95,7 +103,7 @@ UserController.signup = async (req, res) => {
       response.error = error;
     }
   } finally {
-    res.status(response.status).send(response);
+    res.status(200).send(response);
   }
 };
 

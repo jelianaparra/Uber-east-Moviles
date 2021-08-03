@@ -124,14 +124,14 @@ EstablishmentController.getEstablishments = async (req, res) => {
   try {
     let es = await db.any(establishmentQuerys.getEstablishement);
     console.log(es);
-    res.status(200).json({
+    res.status(200).send({
       msg: "Establishments Successfully Found",
       statusCode: 200,
       data: es,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    res.status(500).send({
       msg: "No establishments found",
       statusCode: 500,
     });
